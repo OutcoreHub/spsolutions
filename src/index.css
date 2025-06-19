@@ -1,0 +1,902 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 0%; /* Black #000000 */
+    --foreground: 0 0% 100%; /* White #FFFFFF */
+    --card: 0 0% 5%; /* Near Black */
+    --card-foreground: 0 0% 100%; /* White #FFFFFF */
+    --popover: 0 0% 5%; /* Near Black */
+    --popover-foreground: 0 0% 100%; /* White #FFFFFF */
+    --primary: 220 100% 25%; /* Derived from #367eF3 - Needs adjustment based on gradient use */
+    --primary-foreground: 0 0% 0%; /* Black #000000 */
+    --secondary: 0 0% 10%; /* Darker grey */
+    --secondary-foreground: 0 0% 100%; /* White #FFFFFF */
+    --muted: 0 0% 20%; /* Mid grey */
+    --muted-foreground: 0 0% 60%; /* Light grey */
+    --accent: 220 100% 25%; /* Derived from #367eF3 */
+    --accent-foreground: 0 0% 0%; /* Black #000000 */
+    --destructive: 0 62.8% 30.6%; /* Keep default red */
+    --destructive-foreground: 0 0% 100%; /* White */
+    --border: 220 100% 25%; /* Derived from #367eF3 */
+    --input: 220 100% 25%; /* Derived from #367eF3 */
+    --ring: 220 100% 25%; /* Derived from #367eF3 */
+    --radius: 0.75rem;
+
+    --sidebar-background: 0 0% 98%; /* Keep default light */
+    --sidebar-foreground: 240 5.3% 26.1%; /* Keep default dark */
+    --sidebar-primary: 240 5.9% 10%; /* Keep default dark */
+    --sidebar-primary-foreground: 0 0% 98%; /* Keep default light */
+    --sidebar-accent: 240 4.8% 95.9%; /* Keep default light */
+    --sidebar-accent-foreground: 240 5.9% 10%; /* Keep default dark */
+    --sidebar-border: 220 13% 91%; /* Keep default light */
+    --sidebar-ring: 217.2 91.2% 59.8%; /* Keep default blue */
+  }
+
+  .dark {
+    --background: 20 14.3% 4.1%; /* Keep default dark */
+    --foreground: 0 0% 95%; /* Keep default light */
+    --card: 24 9.8% 10%; /* Keep default dark */
+    --card-foreground: 0 0% 95%; /* Keep default light */
+    --popover: 0 0% 9%; /* Keep default dark */
+    --popover-foreground: 0 0% 95%; /* Keep default light */
+    --primary: 220 100% 25%; /* Derived from #367eF3 */
+    --primary-foreground: 240 5.9% 10%; /* Keep default dark */
+    --secondary: 240 3.7% 15.9%; /* Keep default dark */
+    --secondary-foreground: 0 0% 98%; /* Keep default light */
+    --muted: 0 0% 15%; /* Keep default dark grey */
+    --muted-foreground: 240 5% 64.9%; /* Keep default grey */
+    --accent: 12 6.5% 15.1%; /* Keep default dark */
+    --accent-foreground: 0 0% 98%; /* Keep default light */
+    --destructive: 0 62.8% 30.6%; /* Keep default red */
+    --destructive-foreground: 0 85.7% 97.3%; /* Keep default light red */
+    --border: 240 3.7% 15.9%; /* Keep default dark */
+    --input: 240 3.7% 15.9%; /* Keep default dark */
+    --ring: 142.4 71.8% 29.2%; /* Keep default green */
+    --sidebar-background: 240 5.9% 10%; /* Keep default dark */
+    --sidebar-foreground: 240 4.8% 95.9%; /* Keep default light */
+    --sidebar-primary: 224.3 76.3% 48%; /* Keep default blue */
+    --sidebar-primary-foreground: 0 0% 100%; /* Keep default light */
+    --sidebar-accent: 240 3.7% 15.9%; /* Keep default dark */
+    --sidebar-accent-foreground: 240 4.8% 95.9%; /* Keep default light */
+    --sidebar-border: 240 3.7% 15.9%; /* Keep default dark */
+    --sidebar-ring: 217.2 91.2% 59.8%; /* Keep default blue */
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    /* Use ROOBERT for body text */
+    font-family: 'ROOBERT', -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    /* Use MENSEAL for headings */
+    font-family: 'MENSEAL', SF Pro Display, -apple-system, BlinkMacSystemFont, sans-serif;
+    font-weight: 600; /* Keep default weight or adjust based on MENSEAL weights */
+    letter-spacing: -0.02em;
+  }
+}
+
+@layer components {
+  .glass-nav {
+    /* Adjust transparency/color to fit new dark theme */
+    @apply bg-[#000000]/80 backdrop-blur-2xl border-b border-[#367eF3]/20;
+  }
+
+  .text-gradient-blue {
+    /* Update gradient to match new blue gradient */
+    @apply bg-gradient-to-r from-[#367eF3] to-[#050950] bg-clip-text text-transparent;
+  }
+
+  .btn-gradient-blue {
+    /* Update gradient to match new blue gradient */
+    @apply bg-gradient-to-r from-[#367eF3] to-[#050950] hover:from-[#050950] hover:to-[#367eF3] 
+           text-white transition-all duration-500 rounded-xl;
+  }
+
+  .section-gradient {
+    /* Adjust gradient to fit new dark theme */
+    background: radial-gradient(circle at center, rgba(54, 126, 243, 0.15), rgba(0, 0, 0, 0) 70%);
+  }
+
+  .hero-gradient {
+    /* Adjust gradient to fit new dark theme, remove gold tint */
+    background: radial-gradient(ellipse at center, rgba(54, 126, 243, 0.15) 0%, rgba(0, 0, 0, 0.8) 50%, rgba(0, 0, 0, 1) 100%),
+                linear-gradient(135deg, #000000 0%, #000000 50%, #000000 100%); /* Use black */
+  }
+
+  .modern-card {
+    /* Adjust transparency/color to fit new dark theme */
+    @apply bg-black/40 backdrop-blur-2xl border border-white/10 rounded-2xl 
+           hover:border-white/20 transition-all duration-500;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  }
+
+  .modern-card:hover {
+    transform: translateY(-5px);
+  }
+
+  .border-animate {
+    @apply relative overflow-hidden rounded-2xl;
+  }
+
+  .border-animate::before {
+    content: '';
+    /* Adjust gradient to match new blue */
+    @apply absolute inset-0 bg-gradient-to-r from-transparent via-[#367eF3]/20 to-transparent;
+    animation: border-shine 2s linear infinite;
+  }
+
+  .glow-blue {
+    /* Adjust glow to match new blue */
+    filter: drop-shadow(0 0 8px rgba(54, 126, 243, 0.3));
+  }
+
+  .text-shadow-blue {
+    /* Adjust shadow to match new blue */
+    text-shadow: 0 0 20px rgba(54, 126, 243, 0.2);
+  }
+
+  .glass-card {
+    /* Adjust transparency/color to fit new dark theme */
+    @apply bg-[#000000]/40 backdrop-blur-2xl;
+    box-shadow: 0 8px 32px rgba(54, 126, 243, 0.1); /* Keep subtle blue glow */
+  }
+
+  .animate-pulse-blue {
+    animation: pulse-blue 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  .btn-modern {
+    @apply bg-white text-black hover:bg-gray-200 transition-all duration-300;
+  }
+}
+
+@keyframes border-shine {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 200% 0%;
+  }
+}
+
+@keyframes pulse-blue {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.animate-border-shine {
+  background-size: 200% 100%;
+  animation: border-shine 4s linear infinite;
+}
+
+.geometric-bg {
+  /* Adjust pattern color to blue */
+  background-image: 
+    linear-gradient(30deg, transparent 24%, rgba(54, 126, 243, 0.05) 25%, rgba(54, 126, 243, 0.05) 26%, transparent 27%, transparent 74%, rgba(54, 126, 243, 0.05) 75%, rgba(54, 126, 243, 0.05) 76%, transparent 77%, transparent),
+    linear-gradient(30deg, transparent 24%, rgba(54, 126, 243, 0.05) 25%, rgba(54, 126, 243, 0.05) 26%, transparent 27%, transparent 74%, rgba(54, 126, 243, 0.05) 75%, rgba(54, 126, 243, 0.05) 76%, transparent 77%, transparent);
+  background-size: 50px 50px;
+  background-position: 0 0, 25px 25px;
+}
+
+.particles {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.particle {
+  position: absolute;
+  /* Adjust particle color to blue */
+  background: radial-gradient(circle, rgba(54, 126, 243, 0.8) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translateY(-20px) rotate(180deg);
+    opacity: 1;
+  }
+}
+
+/* Modern Apple-style animations */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Luxury card styles */
+.modern-card:hover {
+  transform: translateY(-5px);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #000000;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #3c3c3c; /* Use dark grey */
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #FFFFFF; /* Use white on hover */
+}
+
+/* Luxury button styles */
+.btn-luxury {
+  /* Adjust colors to dark theme with blue accent */
+  @apply bg-black border border-[#367eF3]/30 text-[#367eF3] hover:bg-[#367eF3]/10 
+         transition-all duration-500 rounded-xl px-6 py-3 font-medium;
+  box-shadow: 0 4px 20px rgba(54, 126, 243, 0.1); /* Use blue shadow */
+}
+
+.btn-luxury:hover {
+  box-shadow: 0 8px 30px rgba(54, 126, 243, 0.2); /* Use blue shadow */
+  border-color: rgba(54, 126, 243, 0.5); /* Use blue border */
+}
+
+/* Apple-style inputs */
+.input-luxury {
+  /* Adjust colors to dark theme with blue accent */
+  @apply bg-black/50 border border-[#367eF3]/20 rounded-xl px-4 py-3
+         focus:border-[#367eF3]/50 focus:ring-1 focus:ring-[#367eF3]/30
+         transition-all duration-300;
+}
+
+/* Luxury text effects */
+.text-luxury {
+  /* Adjust text color to blue accent */
+  @apply text-[#367eF3] font-light tracking-wide;
+}
+
+.heading-luxury {
+  @apply font-light tracking-tight text-white;
+  letter-spacing: -0.02em;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  .scroll-smooth {
+    scroll-behavior: smooth;
+  }
+
+  /* Luxury Gradients - Update to blue/grey theme */
+  .luxury-border {
+    position: relative;
+    border: 1px solid rgba(54, 126, 243, 0.4); /* Use blue */
+    background: linear-gradient(to right, rgba(54, 126, 243, 0.2), rgba(60, 60, 60, 0.2)); /* Use blue and dark grey */
+  }
+
+  .luxury-border::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    background: linear-gradient(45deg, rgba(54, 126, 243, 0.4), rgba(60, 60, 60, 0.4)); /* Use blue and dark grey */
+    z-index: -1;
+    border-radius: inherit;
+  }
+
+  .luxury-gradient {
+    background: linear-gradient(
+      135deg,
+      rgba(60, 60, 60, 0.15),   /* Dark Grey */
+      rgba(90, 90, 90, 0.2),    /* Mid Grey */
+      rgba(54, 126, 243, 0.1),     /* Subtle Blue */
+      rgba(60, 60, 60, 0.15)    /* Dark Grey */
+    );
+  }
+
+  .premium-text {
+    /* Update gradient to silver/blue theme */
+    background: linear-gradient(
+      to right,
+      #C0C0C0,    /* Silver */
+      #D3D3D3,    /* Light Silver */
+      #A9A9A9,    /* Dark Silver */
+      #367eF3,    /* Subtle Blue */
+      #C0C0C0     /* Silver */
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    background-size: 200% auto;
+    animation: shine 8s linear infinite;
+  }
+
+  .premium-border {
+    position: relative;
+    background: linear-gradient(
+      to right,
+      rgba(54, 126, 243, 0.1),  /* Blue */
+      rgba(60, 60, 60, 0.1), /* Dark Grey */
+      rgba(54, 126, 243, 0.1)    /* Blue */
+    );
+  }
+
+  .premium-border::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    padding: 1px;
+    border-radius: inherit;
+    background: linear-gradient(
+      135deg,
+      rgba(54, 126, 243, 0.5),   /* Blue */
+      rgba(60, 60, 60, 0.5),  /* Dark Grey */
+      rgba(54, 126, 243, 0.5)     /* Blue */
+    );
+    -webkit-mask: 
+      linear-gradient(#fff 0 0) content-box, 
+      linear-gradient(#fff 0 0);
+    mask: 
+      linear-gradient(#fff 0 0) content-box, 
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+  }
+
+  .hover-shine {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hover-shine::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+      120deg,
+      transparent,
+      rgba(60, 60, 60, 0.4),    /* Dark Grey */
+      transparent
+    );
+    transition: 0.5s;
+  }
+
+  .hover-shine:hover::before {
+    left: 100%;
+  }
+
+  @keyframes shine {
+    to {
+      background-position: 200% center;
+    }
+  }
+}
+
+/* Modern gradient backgrounds - Update to dark/blue theme */
+.hero-gradient {
+  background: radial-gradient(ellipse at center, rgba(54, 126, 243, 0.15) 0%, rgba(0, 0, 0, 0.8) 50%, rgba(0, 0, 0, 1) 100%),
+              linear-gradient(135deg, #000000 0%, #000000 50%, #000000 100%); /* Use black */
+}
+
+.section-gradient {
+  background: linear-gradient(135deg, #000000 0%, #000000 50%, #000000 100%); /* Use black */
+}
+
+/* Glassmorphism effects - Adjust to new theme */
+.glass-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.glass-nav {
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(54, 126, 243, 0.2); /* Use blue */
+}
+
+/* Gold and Silver accent gradients - Update to blue gradient */
+.text-gradient-gold {
+  background: linear-gradient(135deg, #367eF3, #050950); /* Use new blue gradient */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.btn-gradient-gold {
+  background: linear-gradient(135deg, #367eF3 0%, #050950 100%); /* Use new blue gradient */
+  box-shadow: 0 4px 20px rgba(54, 126, 243, 0.3); /* Use blue shadow */
+  transition: all 0.3s ease;
+}
+
+.btn-gradient-gold:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(54, 126, 243, 0.4); /* Use blue shadow */
+}
+
+/* Geometric patterns - Update to blue */
+.geometric-bg {
+  background-image: 
+    linear-gradient(30deg, transparent 24%, rgba(54, 126, 243, 0.05) 25%, rgba(54, 126, 243, 0.05) 26%, transparent 27%, transparent 74%, rgba(54, 126, 243, 0.05) 75%, rgba(54, 126, 243, 0.05) 76%, transparent 77%, transparent),
+    linear-gradient(30deg, transparent 24%, rgba(54, 126, 243, 0.05) 25%, rgba(54, 126, 243, 0.05) 26%, transparent 27%, transparent 74%, rgba(54, 126, 243, 0.05) 75%, rgba(54, 126, 243, 0.05) 76%, transparent 77%, transparent);
+  background-size: 50px 50px;
+  background-position: 0 0, 25px 25px;
+}
+
+/* Floating particles animation - Update to blue */
+.particles {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.particle {
+  position: absolute;
+  background: radial-gradient(circle, rgba(54, 126, 243, 0.8) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: float 6s ease-in-out infinite;
+}
+
+.particle:nth-child(1) {
+  width: 4px;
+  height: 4px;
+  top: 20%;
+  left: 10%;
+  animation-delay: 0s;
+}
+
+.particle:nth-child(2) {
+  width: 6px;
+  height: 6px;
+  top: 60%;
+  left: 80%;
+  animation-delay: 2s;
+}
+
+.particle:nth-child(3) {
+  width: 3px;
+  height: 3px;
+  top: 80%;
+  left: 20%;
+  animation-delay: 4s;
+}
+
+.particle:nth-child(4) {
+  width: 5px;
+  height: 5px;
+  top: 30%;
+  left: 70%;
+  animation-delay: 1s;
+}
+
+.particle:nth-child(5) {
+  width: 4px;
+  height: 4px;
+  top: 70%;
+  left: 50%;
+  animation-delay: 3s;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translateY(-20px) rotate(180deg);
+    opacity: 1;
+  }
+}
+
+/* Custom animations - Update glow-gold and pulse-gold to blue */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse-gold { /* Rename or update keyframes if needed */
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(54, 126, 243, 0.4); /* Use blue */
+  }
+  50% {
+    box-shadow: 0 0 0 20px rgba(54, 126, 243, 0); /* Use blue */
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.6s ease-out;
+}
+
+.animate-pulse-gold { /* Rename or update class name */
+  animation: pulse-gold 2s infinite;
+}
+
+/* Glow effects - Update to blue */
+.glow-gold { /* Rename or update class name */
+  box-shadow: 0 0 20px rgba(54, 126, 243, 0.3); /* Use blue */
+}
+
+.glow-gold:hover { /* Rename or update class name */
+  box-shadow: 0 0 30px rgba(54, 126, 243, 0.5); /* Use blue */
+}
+
+/* Modern card styles - Adjust to dark theme with subtle blue/grey */
+.modern-card {
+  background: linear-gradient(135deg, rgba(60, 60, 60, 0.05) 0%, rgba(30, 30, 30, 0.02) 100%); /* Use dark grey */
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  transition: all 0.3s ease;
+}
+
+.modern-card:hover {
+  transform: translateY(-5px);
+  background: linear-gradient(135deg, rgba(54, 126, 243, 0.1) 0%, rgba(60, 60, 60, 0.05) 100%); /* Use blue and dark grey */
+  border-color: rgba(54, 126, 243, 0.3); /* Use blue */
+}
+
+/* Text effects - Update to blue */
+.text-shadow-gold { /* Rename or update class name */
+  text-shadow: 0 0 20px rgba(54, 126, 243, 0.5); /* Use blue */
+}
+
+/* Smooth transitions for all interactive elements */
+* {
+  transition: all 0.3s ease;
+}
+
+/* Border animations - Update to blue */
+.border-animate {
+  position: relative;
+  overflow: hidden;
+}
+
+.border-animate::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(54, 126, 243, 0.4), transparent); /* Use blue */
+  transition: left 0.5s;
+}
+
+.border-animate:hover::before {
+  left: 100%;
+}
+
+/* 3D Elements */
+.card-3d {
+  /* Adjust background gradient to dark theme */
+  @apply relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#000000] to-[#000000]; /* Use black */
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.card-3d::before {
+  content: '';
+  /* Adjust gradient to blue */
+  @apply absolute inset-0 bg-gradient-to-r from-[#367eF3]/10 to-transparent opacity-0;
+  transition: opacity 0.3s ease;
+}
+
+.card-3d:hover::before {
+  opacity: 1;
+}
+
+/* Glassmorphism effects - Adjust to dark theme */
+.glass-effect {
+  @apply bg-black/40 backdrop-blur-2xl border border-white/10 
+         rounded-2xl shadow-lg;
+}
+
+/* Modern gradients - Update to new blue gradient */
+.gradient-text {
+  @apply bg-gradient-to-r from-[#367eF3] to-[#050950] 
+         bg-clip-text text-transparent font-bold;
+}
+
+.gradient-border {
+  @apply border border-transparent bg-gradient-to-r from-[#367eF3] to-[#050950] 
+         rounded-2xl p-[1px];
+  background-clip: padding-box;
+}
+
+/* Animated background - Adjust to dark theme */
+.animated-bg {
+  background: linear-gradient(45deg, #000000, #000000, #000000); /* Use black */
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Hover effects */
+.hover-lift {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hover-lift:hover {
+  transform: translateY(-2px);
+}
+
+/* Modern dividers - Adjust to dark/grey/blue */
+.divider {
+  @apply h-px bg-gradient-to-r from-transparent via-[#3c3c3c]/20 to-transparent; /* Use dark grey */
+}
+
+/* New styles for section tags - Adjust to dark/grey/blue */
+.section-tag {
+  background: linear-gradient(
+    to right,
+    rgba(60, 60, 60, 0.15),   /* Dark Grey */
+    rgba(90, 90, 90, 0.2),    /* Mid Grey */
+    rgba(54, 126, 243, 0.1)      /* Subtle Blue */
+  );
+  border: 1px solid rgba(60, 60, 60, 0.3); /* Use dark grey */
+  color: #C0C0C0; /* Keep light grey text */
+}
+
+.section-tag .dot {
+  background: #367eF3; /* Use blue dot */
+}
+
+/* Section divider with silver gradient - Update to grey/blue gradient */
+.section-divider {
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(60, 60, 60, 0.4),    /* Dark Grey */
+    rgba(90, 90, 90, 0.5),    /* Mid Grey */
+    rgba(54, 126, 243, 0.2),     /* Subtle Blue */
+    rgba(60, 60, 60, 0.4),    /* Dark Grey */
+    transparent
+  );
+  margin: 3rem 0;
+  width: 100%;
+}
+
+/* Update glow effects - Update to blue */
+.premium-glow { /* Rename or update class name */
+  box-shadow: 0 0 20px rgba(54, 126, 243, 0.2), /* Use blue */
+              0 0 40px rgba(54, 126, 243, 0.1); /* Use blue */
+}
+
+/* Modern Stats Section Styles - Adjust to dark/blue/grey */
+@keyframes subtle-float {
+  0%, 100% {
+    transform: translateY(0) translateX(0);
+  }
+  50% {
+    transform: translateY(-5px) translateX(2px);
+  }
+}
+
+.stats-card {
+  @apply bg-black backdrop-blur-sm rounded-2xl relative overflow-hidden;
+  /* Add a gradient border using a pseudo-element */
+}
+
+.stats-card::before {
+  content: '';
+  @apply absolute inset-0 rounded-2xl p-px; /* Padding creates the border thickness */
+  background: linear-gradient(to right, #367eF3, #050950);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  pointer-events: none; /* Ensure clicks pass through */
+  z-index: 0;
+}
+
+.stats-card:hover {
+  /* Adjust hover effect if needed, but keep the background/border defined above */
+  /* @apply border-[#367eF3]/30; */ /* Remove hover border */
+}
+
+.stats-value {
+  /* Update gradient to blue/silver theme */
+  background: linear-gradient(
+    to right,
+    #367eF3, /* Blue */
+    #050950, /* Dark Blue */
+    #C0C0C0, /* Silver */
+    #D3D3D3  /* Light Silver */
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-feature-settings: "ss01" on, "ss02" on;
+  letter-spacing: -0.02em;
+  font-weight: 900; /* Keep ultra bold */
+}
+
+.stats-grid-pattern {
+  background-size: 24px 24px;
+  background-image: 
+    linear-gradient(to right, rgba(54, 126, 243, 0.05) 1px, transparent 1px), /* Use blue */
+    linear-gradient(to bottom, rgba(54, 126, 243, 0.05) 1px, transparent 1px); /* Use blue */
+}
+
+.stats-hover-glow:hover {
+  box-shadow: 
+    0 0 30px rgba(54, 126, 243, 0.1), /* Use blue */
+    inset 0 0 30px rgba(54, 126, 243, 0.05); /* Use blue */
+}
+
+/* Contact Cards Styles - Adjust to dark/blue */
+.contact-card {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.contact-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    800px circle at var(--mouse-x) var(--mouse-y),
+    rgba(54, 126, 243, 0.06), /* Use blue */
+    transparent 40%
+  );
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+
+.contact-card:hover::before {
+  opacity: 1;
+}
+
+.contact-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    600px circle at var(--mouse-x) var(--mouse-y),
+    rgba(54, 126, 243, 0.4), /* Use blue */
+    transparent 40%
+  );
+  opacity: 0;
+  transition: opacity 0.5s;
+  z-index: -1;
+}
+
+.contact-card:hover::after {
+  opacity: 0.1;
+}
+
+.contact-icon {
+  position: relative;
+  transition: transform 0.3s ease;
+}
+
+.contact-card:hover .contact-icon {
+  transform: translateY(-2px);
+}
+
+/* Solution Cards Styles - Adjust to dark/blue */
+.solution-card {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.solution-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(54, 126, 243, 0.1), /* Use blue */
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.solution-card:hover::before {
+  opacity: 1;
+}
+
+.solution-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px -10px rgba(0, 0, 0, 0.1);
+}
+
+.solution-icon {
+  position: relative;
+  transition: transform 0.3s ease;
+}
+
+@keyframes slide {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.animate-partner-slider {
+  animation: slide 30s linear infinite;
+}
+
+@font-face {
+  font-family: 'MENSEAL';
+  src: url('/fonts/menseal-regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'MENSEAL';
+  src: url('/fonts/menseal-bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'ROOBERT';
+  src: url('/fonts/RoobertTRIAL-Regular-BF67243fd53fdf2.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'ROOBERT';
+  src: url('/fonts/RoobertTRIAL-Bold-BF67243fd540abb.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+}
