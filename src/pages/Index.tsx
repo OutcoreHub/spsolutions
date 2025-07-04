@@ -18,6 +18,7 @@ import MobileNav from '@/components/MobileNav';
 import Head from '@/components/Head';
 import CookieConsent from '@/components/CookieConsent';
 import luxuryHomeImage from '@/assets/luxury-home.jpg';
+import { useNavigate } from 'react-router-dom';
 
 const Index = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -29,6 +30,7 @@ const Index = () => {
     objective: '',
     value: ''
   });
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -54,9 +56,7 @@ const Index = () => {
       });
 
       if (response.ok) {
-        console.log('Form data sent successfully!', formData);
-        alert('MUITO OBRIGADO ! RECEBEMOS O SEU CONTATO E EM NOSSA EQUIPE ENTRARÁ EM CONTATO COM VOCÊ');
-        // Optionally, clear the form after successful submission
+        navigate('/obrigado');
         setFormData({
           name: '',
           email: '',
@@ -65,11 +65,9 @@ const Index = () => {
           value: ''
         });
       } else {
-        console.error('Failed to send form data:', response.statusText);
         alert('Ocorreu um erro ao enviar sua mensagem. Por favor, tente novamente.');
       }
     } catch (error) {
-      console.error('Error submitting form:', error);
       alert('Ocorreu um erro na conexão. Por favor, tente novamente mais tarde.');
     }
   };
