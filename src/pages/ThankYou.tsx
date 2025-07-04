@@ -11,7 +11,7 @@ const ThankYou = () => (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-[#367eF3]/10 to-white">
       <div className="bg-white rounded-xl shadow-lg p-8 max-w-md w-full text-center">
         <h1 className="text-3xl font-bold mb-4 text-[#367eF3]">Obrigado pelo seu contato!</h1>
-        <p className="text-lg text-gray-700 mb-6">
+        <p className="text-lg text-black mb-6">
           Recebemos suas informações com sucesso.<br />
           Em breve, nossa equipe entrará em contato com você.
         </p>
