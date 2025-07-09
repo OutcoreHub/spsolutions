@@ -47,7 +47,7 @@ const Index = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const response = await fetch('https://n8n.outcorehub.com/webhook/3554dfe9-4417-4d37-8315-933baedb66d1', {
+      const response = await fetch('https://n8n.outcorehub.com/webhook/spsolutions', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -65,10 +65,10 @@ const Index = () => {
           value: ''
         });
       } else {
-        alert('Ocorreu um erro ao enviar sua mensagem. Por favor, tente novamente.');
+        navigate('/obrigado');
       }
     } catch (error) {
-      alert('Ocorreu um erro na conexão. Por favor, tente novamente mais tarde.');
+      navigate('/obrigado');
     }
   };
 
